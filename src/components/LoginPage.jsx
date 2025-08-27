@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./LoginPage.css";
 
@@ -41,7 +40,7 @@ function LoginPage() {
 
           <div className="aux">
             <span>Don’t have an account? </span>
-            <Link to="/login" className="link">Sign up</Link>
+            <Link to="/sign-up" className="link">Sign up</Link>
           </div>
         </form>
       </div>
