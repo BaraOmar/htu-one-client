@@ -1,0 +1,27 @@
+.student-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--student-bg);
+  font-family: var(--student-font);
+}
+
+.student-layout__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+  z-index: 999;  
+  border: 0;
+}
+
+@media (max-width: 767px) {
+  .sidebar-open {
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,86 @@
+.topbar {
+  height: 56px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-family: Inter, sans-serif;
+}
+
+.topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.topbar__logo {
+  height: 24px;
+}
+.topbar__role {
+  font-size: 24px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.topbar__btn {
+  padding: 6px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+.topbar__btn:hover {
+  background: #f9fafb;
+}
+.topbar__user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.topbar__avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+.topbar__name {
+  font-size: 14px;
+  color: #111827;
+}
+
+.sidebar-toggle {
+  display: none;
+  border: none;
+  background: transparent;
+  padding: 8px;
+  margin-right: 8px;
+  cursor: pointer;
+  font-size: 22px;   
+  line-height: 1;
+}
+
+@media (max-width: 767px) {
+  .sidebar-toggle { display: inline-flex; align-items: center; justify-content: center; }
+}
+
+@media (max-width: 448px) {
+  .sidebar-toggle { font-size: 20px; padding: 6px; }
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
