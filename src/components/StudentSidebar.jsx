@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import htuLogo from "../assets/htu.png"; 
-import "./StudentSidebar.css";
+import "./css/StudentSidebar.css";
 
 
 function StudentSidebar() {

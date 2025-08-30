@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./SignupPage.css";
+import "./css/SignupPage.css";
 
 function SignupPage() {
 return (

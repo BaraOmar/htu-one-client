@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import StudentSidebar from "./StudentSidebar";
 import Topbar from "./Topbar";
 import htuLogo from "../assets/htu.png"; 
-import "./StudentLayout.css";
+import "./css/StudentLayout.css";
 
 function StudentLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
