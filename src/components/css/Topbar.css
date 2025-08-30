@@ -66,7 +66,7 @@
   line-height: 1;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 770px) {
   .sidebar-toggle { display: inline-flex; align-items: center; justify-content: center; }
 }
 
@@ -83,4 +83,32 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.cp-choice-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.cp-choice-item span {
+  flex: 1;
+}
+
+.cp-delete {
+  background: transparent;
+  border: none;
+  color: var(--ss-primary);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: background 0.2s;
+}
+
+.cp-delete:hover {
+  background: rgba(200,16,46,0.1);
 }

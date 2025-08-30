@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./StudentHomePage.css";
+import "./css/StudentHomePage.css";
 
 
 function StudentHomePage() {
