@@ -1,0 +1,110 @@
+:root{
+  --sup-border:#e5e7eb;
+  --sup-text:#111827;
+  --sup-muted:#6b7280;
+  --sup-primary:#c8102e;
+  --sup-card:#fff;
+  --sup-bg:#fff;
+}
+
+/* Page */
+.sup-students{ padding:20px; }
+.sup-students__title{ font-size:24px; font-weight:700; color:var(--sup-text); margin-bottom:16px; }
+
+/* ===== Table (default for ≥431px) ===== */
+.sup-table-wrap{
+  border:1px solid var(--sup-border);
+  border-radius:5px;
+  overflow:hidden;
+  background:var(--sup-card);
+}
+.sup-table{ width:100%; border-collapse:separate; border-spacing:0; }
+.sup-table thead th{
+  background:var(--sup-primary);
+  color:#fff;
+  text-align:left;
+  font-weight:700;
+  padding:14px 16px;
+  font-size:14px;
+  width:25%; 
+}
+.sup-table tbody td{
+  padding:16px;
+  border-top:1px solid var(--sup-border);
+  color:var(--sup-text);
+  font-weight:500;
+}
+.sup-table tbody tr:hover{ background:#f9fafb; }
+.sup-table__actions{ white-space:nowrap; }
+.view-link{
+  display:inline-flex; align-items:center; gap:8px;
+  color:var(--sup-primary); text-decoration:none; font-weight:700;
+}
+.view-link:hover{ text-decoration:underline; }
+.view-link, .sup-card-link{
+  display: inline-block;   /* was inline-flex */
+  gap: 0;                  /* remove extra space from old icon gap */
+}
+
+/* ===== Cards (hidden by default) ===== */
+.sup-cards{ display:none; }
+
+.sup-student-card{
+  background:#fff;
+  border:1px solid var(--sup-border);
+  border-radius:12px;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-shadow: 0 0 0 rgba(0,0,0,0); /* keep flat like your design */
+}
+.sup-student-card + .sup-student-card{ margin-top:12px; }
+
+.sup-student-card__head{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+}
+.sup-student-card__name{
+  font-size:16px; font-weight:700; color:var(--sup-text); margin:0;
+}
+.sup-badge{
+  background:#f3f4f6; color:#111827; border:1px solid var(--sup-border);
+  font-size:12px; font-weight:700; padding:4px 8px; border-radius:999px;
+}
+
+.sup-student-card__row{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 0; border-top:1px solid var(--sup-border);
+}
+.sup-label{ color:var(--sup-muted); font-weight:600; font-size:13px; }
+.sup-value{ color:var(--sup-text); font-weight:700; }
+
+.sup-card-link{
+  margin-top:2px;
+  display:inline-flex; align-items:center; gap:8px;
+  width:100%;
+  justify-content:center;
+  padding:10px 12px;
+  border-radius:10px;
+  background:var(--sup-primary);
+  color:#fff; text-decoration:none; font-weight:700;
+}
+
+/* ===== Responsiveness ===== */
+@media (max-width: 770px){
+  .sup-students__title{ font-size:22px; margin-bottom:14px; }
+  .sup-table-wrap{ overflow-x:auto; }
+}
+
+/* Switch to cards on phones */
+@media (max-width: 431px){
+  .sup-students{ padding:16px; }
+  .sup-students__title{ font-size:20px; margin-bottom:12px; }
+
+  .sup-table-wrap{ display:none; }   /* hide table on phones */
+  .sup-cards{ display:block; }       /* show cards */
+
+  .sup-student-card{ padding:12px; border-radius:10px; }
+  .sup-student-card__name{ font-size:15px; }
+  .sup-card-link{ padding:12px 14px; font-size:14px; }
+}

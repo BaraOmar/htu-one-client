@@ -15,11 +15,11 @@ function SupervisorSidebar() {
           <span className="student-sidebar__label">Dashboard</span>
         </Link>
 
-        <Link to="/supervisor/course-preferences" className="student-sidebar__link">
+        <Link to="/supervisor/students" className="student-sidebar__link">
           <span className="student-sidebar__label">Students List</span>
         </Link>
 
-        <Link to="/supervisor/history" className="student-sidebar__link">
+        <Link to="/supervisor/requests" className="student-sidebar__link">
           <span className="student-sidebar__label">Requests</span>
         </Link>
 
