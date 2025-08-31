@@ -3,7 +3,7 @@ import "./css/StudentHomePage.css";
 
 
 function StudentHomePage() {
-    // TODO: replace with real data (context/API)
+    // TODO: replace with real data (API)
     const requests = [
         { id: 1, title: "Advanced Database Systems", date: "2024-03-10", status: "Approved" },
         { id: 2, title: "Machine Learning Fundamentals", date: "2024-03-05", status: "Pending" },

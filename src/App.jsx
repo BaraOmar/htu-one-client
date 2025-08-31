@@ -4,6 +4,8 @@ import SignupPage from './components/SignupPage';
 import StudentHomePage from './components/StudentHomePage';
 import StudentLayout from './components/StudentLayout';
 import StudentCoursePreferences from "./components/StudentCoursePreferences";
+import SupervisorDashboard from "./components/SupervisorDashboard";
+import SupervisorLayout from "./components/SupervisorLayout";
 
 
 
@@ -19,6 +21,12 @@ function App() {
           <Route index element={<StudentHomePage />} />
           <Route path="home" element={<StudentHomePage />} />
           <Route path="course-preferences" element={<StudentCoursePreferences />} />
+        </Route>
+        <Route path="/supervisor" element={<SupervisorLayout />}>
+          <Route index element={<SupervisorDashboard />} />
+          <Route path="home" element={<SupervisorDashboard />} />
+          <Route path="students" element={<SupervisorDashboard />} />
+          <Route path="requests" element={<SupervisorDashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>

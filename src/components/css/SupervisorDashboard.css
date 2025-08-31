@@ -1,0 +1,181 @@
+/* ================================
+   Supervisor Dashboard — Full CSS
+   (sidebar/topbar handled elsewhere)
+================================== */
+
+:root {
+  --sup-border: #e5e7eb;
+  --sup-text: #111827;
+  --sup-muted: #6b7280;
+  --sup-primary: #c8102e;
+  --sup-card: #ffffff;
+  --sup-bg: #ffffff;
+  /* content area bg */
+}
+
+/* Page shell */
+.sup-dash {
+  padding: 20px;
+  /* background:var(--sup-bg, #fff); */
+}
+
+.sup-dash__title {
+  font-size: 35px;
+  font-weight: 700;
+  color: var(--sup-text, #111827);
+  margin-bottom: 16px;
+}
+
+/* Cards grid */
+.sup-dash__cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* Card */
+.sup-card {
+  background: var(--sup-card, #fff);
+  border: 1px solid var(--sup-border, #e5e7eb);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  /* keep CTA at bottom */
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 300px;
+}
+
+.sup-card__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--sup-muted, #6b7280);
+  font-weight: 600;
+  font-size: 35px;
+  margin-bottom: 8px;
+}
+
+.sup-card__value {
+  font-size: 35px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--sup-text, #111827);
+}
+
+/* Card footer actions */
+.sup-card__actions {
+  margin-top: auto;
+  /* pushes button to the bottom */
+}
+
+.sup-btn {
+  /* works for <button> and <Link> */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 70px;
+  padding: 12px 14px;
+  border: none;
+  font-size: 30px;
+  border-radius: 5px;
+  background: var(--sup-primary, #c8102e);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  /* for <Link> */
+  -webkit-tap-highlight-color: transparent;
+  transition: filter .15s ease, transform .02s ease-in;
+}
+
+.sup-btn:hover {
+  filter: brightness(.96);
+}
+
+.sup-btn:active {
+  transform: translateY(1px);
+}
+
+.sup-btn:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.sup-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* =======================
+   Responsive breakpoints
+========================= */
+@media (max-width: 996px) {
+    .sup-dash__cards {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+/* ≤ 770px: stack cards/buttons, shrink type a bit */
+@media (max-width: 770px) {
+  .sup-dash__title {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .sup-dash__cards {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .sup-card {
+    padding: 16px 18px;
+    border-radius: 10px;
+    min-height: 140px;
+  }
+
+  .sup-card__value {
+    font-size: 20px;
+  }
+  .sup-card__label{
+    
+    font-size: 20px;
+}
+  .sup-btn {
+    padding: 14px 16px;
+    font-size: 20px;
+    height: inherit;
+  }
+}
+
+/* ≤ 430px: tighter spacing and fonts */
+@media (max-width: 430px) {
+  .sup-dash {
+    padding: 16px;
+  }
+
+  .sup-dash__title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .sup-card {
+    padding: 14px 16px;
+  }
+
+  .sup-card__label {
+    font-size: 13px;
+  }
+
+  .sup-card__value {
+    font-size: 32px;
+  }
+
+  .sup-btn {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+}
