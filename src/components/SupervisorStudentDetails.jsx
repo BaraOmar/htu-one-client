@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import htuLogo from "../assets/htu.png"; 
 import "./css/SupervisorStudentDetails.css";
 
-export default function SupervisorStudentDetails() {
+function SupervisorStudentDetails() {
   const { id } = useParams();
 
   // TODO: fetch by id
@@ -126,3 +126,4 @@ export default function SupervisorStudentDetails() {
     </div>
   );
 }
+export default SupervisorStudentDetails
