@@ -1,0 +1,127 @@
+/* ===== Theme ===== */
+:root{
+  --sup-border:#e5e7eb;
+  --sup-text:#111827;
+  --sup-muted:#6b7280;
+  --sup-primary:#c8102e; /* HTU red */
+}
+
+/* ===== Page ===== */
+.req{ padding:20px;  }
+.req-title{ font-size:24px; font-weight:700; color:var(--sup-text); margin-bottom:12px; }
+
+/* ===== Card wrapper ===== */
+.req-card{
+  background:#fff;
+  border:1px solid var(--sup-border);
+  border-radius:12px;
+  padding:16px 16px 18px;
+}
+.req-card__title{ font-size:16px; font-weight:700; color:var(--sup-text); margin:0 0 12px; }
+
+/* ===== TABLE (default for normal screens) ===== */
+.req-table-wrap{
+  border:1px solid var(--sup-border);
+  border-radius:5px;
+  overflow:hidden;
+  background:#fff;
+}
+.req-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  min-width: 100%; /* keeps header intact on small tablets; container will scroll */
+}
+.req-table thead th{
+  background:var(--sup-primary);
+  color:#fff;
+  text-align:left;
+  font-weight:700;
+  padding:14px 16px;
+  font-size:14px;
+}
+.req-table tbody td{
+  padding:14px 16px;
+  border-top:1px solid var(--sup-border);
+  color:var(--sup-text);
+  font-weight:500;
+}
+.req-col-actions{ width:120px; }
+
+/* Status pill (neutral) */
+.req-status{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:4px 10px; border:1px solid var(--sup-border);
+  border-radius:999px; background:#eef1f5; color:#111827;
+  font-size:12px; font-weight:800;
+}
+
+/* Approve button */
+.req-actions{ white-space:nowrap; }
+.req-approve{
+  background:var(--sup-primary); color:#fff; border:none; border-radius:8px;
+  padding:10px 14px; font-weight:700; cursor:pointer;
+  transition:filter .15s ease, transform .02s ease-in;
+}
+.req-approve:hover{ filter:brightness(.96); }
+.req-approve:active{ transform:translateY(1px); }
+.req-approve:focus{ outline:2px solid #000; outline-offset:2px; }
+
+/* ===== MOBILE CARDS (hidden by default) ===== */
+.req-cards{ display:none; }
+
+.req-carditem{
+  border:1px solid var(--sup-border);
+  border-radius:10px;
+  background:#fff;
+  padding:12px;
+}
+.req-carditem + .req-carditem{ margin-top:10px; }
+
+.req-carditem__head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-bottom:6px;
+}
+.req-name{ margin:0; font-size:16px; font-weight:700; color:var(--sup-text); }
+
+.req-row{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+  padding:8px 0; border-top:1px solid var(--sup-border);
+}
+.req-row:first-of-type{ border-top:none; padding-top:0; }
+.req-key{ color:var(--sup-muted); font-weight:700; font-size:12px; }
+.req-val{ color:var(--sup-text); font-weight:600; }
+
+.req-carditem__actions{ margin-top:10px; display:flex; justify-content:flex-end; }
+
+/* ===== Responsive ===== */
+
+/* ≤ 770px: smaller paddings, table scrolls horizontally */
+@media (max-width: 770px){
+  .req-title{ font-size:22px; margin-bottom:10px; }
+  .req-card{ padding:14px; }
+  .req-card__title{ font-size:15px; margin-bottom:10px; }
+
+  .req-table-wrap{ overflow-x:auto; }
+  .req-table{ min-width:100%; }
+
+  .req-table thead th{ padding:12px 14px; font-size:13px; }
+  .req-table tbody td{ padding:12px 14px; font-size:14px; }
+
+  .req-approve{ padding:9px 12px; }
+}
+
+/* ≤ 431px (phones): switch TABLE -> CARDS */
+@media (max-width: 431px){
+  .req{ padding:16px; }
+  .req-card{ padding:12px; }
+  .req-card__title{ font-size:14px; }
+
+  /* hide table, show cards */
+  .req-table-wrap{ display:none; }
+  .req-cards{ display:block; }
+
+  .req-name{ font-size:15px; }
+  .req-approve{ width:auto; padding:9px 12px; font-size:13px; }
+  .req-status{ padding:3px 8px; font-size:11px; }
+}
