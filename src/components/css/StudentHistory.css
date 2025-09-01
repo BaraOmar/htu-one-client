@@ -1,0 +1,127 @@
+:root{
+  --sup-border:#e5e7eb;
+  --sup-text:#111827;
+  --sup-muted:#6b7280;
+}
+
+.sh{ padding:20px; }
+.sh-page-title{ font-size:24px; font-weight:700; color:var(--sup-text); margin-bottom:12px; }
+
+.sh-card{
+  background:#fff;
+  border:1px solid var(--sup-border);
+  border-radius:5px;
+  padding:16px;
+}
+.sh-card-title{ font-size:16px; font-weight:700; color:var(--sup-text); margin:0 0 12px; }
+
+/* ===== Table (default) ===== */
+.sh-table-wrap{
+  border:1px solid var(--sup-border);
+  border-radius:5px;
+  overflow:hidden;
+  background:#fff;
+}
+.sh-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  min-width: 100%;
+}
+.sh-table thead th{
+  background:#f9fafb;
+  color:#374151;
+  text-align:left;
+  font-weight:700;
+  padding:12px 16px;
+  border-bottom:1px solid var(--sup-border);
+}
+.sh-table tbody td{
+  padding:14px 16px;
+  border-top:1px solid var(--sup-border);
+  color:#111827;
+  vertical-align:top;
+}
+.sh-course{ line-height:1.4; }
+.sh-feedback{ color:#374151; }
+.sh-status-cell{ font-weight:700; color:#111827; } /* plain text status */
+
+/* ===== Mobile cards (hidden by default) ===== */
+.sh-cards{ display:none; }
+.sh-sub-card{
+  border:1px solid var(--sup-border);
+  border-radius:10px;
+  background:#fff;
+  padding:12px;
+}
+.sh-sub-card + .sh-sub-card{ margin-top:10px; }
+
+.sh-sub-head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-bottom:6px;
+}
+.sh-sub-id{ font-weight:700; color:#111827; }
+.sh-status-text{ font-weight:700; color:#111827; } /* plain text status */
+
+.sh-row{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+  padding:8px 0; border-top:1px solid var(--sup-border);
+}
+.sh-row:first-of-type{ border-top:none; padding-top:0; }
+.sh-key{ color:var(--sup-muted); font-weight:700; font-size:12px; }
+.sh-val{ color:#111827; font-weight:500; }
+.sh-val--stack > div{ line-height:1.4; }
+/* Neutral pill like the screenshot */
+.sh-badge{
+  display:inline-block;
+  padding:6px 12px;
+  border:1px solid #e5e7eb;      /* light border */
+  background:#f1f5f9;            /* soft gray */
+  color:#111827;                 /* dark text */
+  border-radius:999px;           /* fully rounded */
+  font-weight:500;
+  font-size:12px;
+  line-height:1;
+  letter-spacing:0.2px;
+}
+/* Table header — turn it red with white text */
+.sh-table thead th{
+  background: var(--sup-primary, #c8102e);  /* HTU red */
+  color: #fff;
+  text-align: left;
+  font-weight: 700;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--sup-border, #e5e7eb);
+}
+
+/* (optional) slightly smaller padding on small screens */
+@media (max-width: 770px){
+  .sh-table thead th{ padding: 10px 14px; }
+}
+
+/* tighten slightly on very small screens */
+@media (max-width: 431px){
+  .sh-badge{ padding:5px 10px; font-size:11px; }
+}
+
+
+/* ===== Responsive ===== */
+@media (max-width: 770px){
+  .sh-page-title{ font-size:22px; }
+  .sh-card{ padding:14px; }
+  .sh-card-title{ font-size:15px; margin-bottom:10px; }
+
+  .sh-table-wrap{ overflow-x:auto; }
+  .sh-table{ min-width: 100%; }
+  .sh-table thead th{ padding:10px 14px; font-size:13px; }
+  .sh-table tbody td{ padding:12px 14px; font-size:14px; }
+}
+
+@media (max-width: 431px){
+  .sh{ padding:16px; }
+  .sh-card{ padding:12px; }
+
+  /* switch to cards on phones */
+  .sh-table-wrap{ display:none; }
+  .sh-cards{ display:block; }
+}
