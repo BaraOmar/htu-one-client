@@ -7,6 +7,7 @@ import StudentCoursePreferences from "./components/StudentCoursePreferences";
 import SupervisorDashboard from "./components/SupervisorDashboard";
 import SupervisorLayout from "./components/SupervisorLayout";
 import SupervisorStudentsList from "./components/SupervisorStudentsList";
+import SupervisorStudentDetails from "./components/SupervisorStudentDetails";
 
 
 
@@ -27,8 +28,11 @@ function App() {
           <Route index element={<SupervisorDashboard />} />
           <Route path="home" element={<SupervisorDashboard />} />
           <Route path="students" element={<SupervisorStudentsList />} />
+          <Route path="students/:id" element={<SupervisorStudentDetails />} />
           <Route path="requests" element={<SupervisorDashboard />} />
         </Route>
+        <Route path="/supervisor/students" element={<SupervisorStudentsList />} />
+        <Route path="/supervisor/requests" element={<SupervisorDashboard />} />
       </Routes>
     </BrowserRouter>
   )

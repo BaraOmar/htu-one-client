@@ -20,7 +20,7 @@ function SupervisorDashboard() {
           </div>
 
           <div className="sup-card__actions">
-            <Link to="students" className="sup-btn sup-btn--card">
+            <Link to="/supervisor/students" className="sup-btn sup-btn--card">
                View Students
             </Link>
           </div>
@@ -36,7 +36,7 @@ function SupervisorDashboard() {
           </div>
 
           <div className="sup-card__actions">
-            <Link to="requests" className="sup-btn sup-btn--card">
+            <Link to="/supervisor/requests" className="sup-btn sup-btn--card">
                Requests
             </Link>
           </div>
