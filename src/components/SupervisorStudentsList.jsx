@@ -37,10 +37,7 @@ function SupervisorStudentsList() {
                                 <td>{s.id}</td>
                                 <td>{s.lastSubmission}</td>
                                 <td className="sup-table__actions">
-                                    <Link to={`/supervisor/students/${s.id}`} className="view-link">
-                                        View Details
-                                    </Link>
-
+                                    <Link to={s.id} className="view-link">View Details</Link>
                                 </td>
                             </tr>
                         ))}
@@ -62,9 +59,7 @@ function SupervisorStudentsList() {
                             <span className="sup-value">{s.lastSubmission}</span>
                         </div>
 
-                        <Link to={`/supervisor/students/${s.id}`} className="sup-card-link">
-                            View Details
-                        </Link>
+                        <Link to={s.id} className="sup-card-link">View Details</Link>
 
                     </article>
                 ))}
