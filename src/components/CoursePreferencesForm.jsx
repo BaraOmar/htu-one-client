@@ -1,108 +1,118 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./css/StudentCoursePreferences.css";
 
-// All course options combined TODO: replace later with API)
-const ALL_OPTIONS = [
-  "Option 1",
-  "Option 2",
-  "Option 3",
-  "Option 4",
-  "Option 5",
-  "Option 6",
-  "Option 7",
-  "Option 8",
-];
 
 function CoursePreferencesForm() {
+
   const slots = [0, 1, 2, 3, 4, 5];
-  const [selected, setSelected] = useState([""]);
-  const [comments, setComments] = useState([""]);
+  const [courses, setCourses] = useState([]);
+  const [selected, setSelected] = useState(Array(6).fill(""));
+  const [comments, setComments] = useState(Array(6).fill(""));
+  
+  const navigate = useNavigate();
 
-  // Saved state (shown only after submit)
-  const [savedSelected, setSavedSelected] = useState([]);
-  const [savedComments, setSavedComments] = useState([]);
-  const [showChoices, setShowChoices] = useState(false);
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/courses`)
+      .then((r) => (r.ok ? r.json() : []))
+      .then((data) => setCourses(data))
+      .catch((e) => console.error("courses fetch error", e));
+  }, []);
 
-  const handleSubmit = (e) => {
+
+  function label(c) {
+    return `${c.course_number} — ${c.name}`;
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    setSavedSelected(selected);
-    setSavedComments(comments);
-    setShowChoices(true);
-  };
+
+    // Check duplicates
+    const dedup = new Set(selected);
+    if (dedup.size !== 6) {
+      alert("Each of the 6 choices must be a different course.");
+      return;
+    }
+
+    const raw = localStorage.getItem("user");
+    const user =JSON.parse(raw);
+    const student_id = user.id
+
+    const payload = {
+      student_id,
+      preferences: selected.map((courseId, i) => ({
+        courseId: Number(courseId),
+        comment: comments[i] || "",
+      })),
+    };
+
+    try {
+      await fetch(`http://localhost:5000/api/requests`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+
+      // redirect to home after success
+      navigate("/student");
+    } catch (err) {
+      alert("Network error while saving preferences.");
+    }
+  }
 
   return (
-    <>
-      {showChoices ? (
-        <div className="cp-subsection">
-          <h3>Current Choices</h3>
-          <ul>
-            {slots.map((i) => {
-              const c = savedSelected[i] || "";
-              const note = savedComments[i] || "";
-              return (
-                <li key={i}>
-                  <span>
-                    <strong>Course {i + 1}:</strong> {c || "—"}
-                    {note ? ` — ${note}` : ""}
-                  </span>
-                  <button type="button" className="cp-delete" onClick={() => alert("deleted")}>
-                    Delete
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ) : (
-        <div className="cp-subsection">
-          <h3>Current Choices</h3>
-          <p className="cp-muted">No saved choices yet — use the form below.</p>
-        </div>
-      )}
+    <form className="cp-form" onSubmit={handleSubmit}>
+      <div className="cp-subsection">
+        <div className="cp-grid">
+          {slots.map((i) => (
+            <div key={i} className="cp-card">
+              <strong>Course {i + 1}</strong>
 
-      <form className="cp-form" onSubmit={handleSubmit}>
-        <h2 className="cp-section__title">Select Courses</h2>
-
-        <div className="cp-subsection">
-          <h3>
-            Courses <span className="cp-muted">(6)</span>
-          </h3>
-          <div className="cp-grid">
-            {slots.map((i) => (
-              <div key={i} className="cp-card">
-                <strong>Course {i + 1}</strong>
-                <select className="cp-select" value={selected[i] || ""} onChange={(e) => setSelected((prev) => {
-                  const next = [...prev];
+              <select
+                className="cp-select"
+                name={`course_${i}`}
+                required
+                value={selected[i]}
+                onChange={(e) => {
+                  const next = [...selected];
                   next[i] = e.target.value;
-                  return next;
-                })
-                }
-                >
-                  <option value="">Select a course</option>
-                  {ALL_OPTIONS.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
-                <textarea className="cp-textarea" rows={3} placeholder="Add comments…" value={comments[i] || ""} onChange={(e) =>
-                  setComments((prev) => {
-                    const next = [...prev];
-                    next[i] = e.target.value;
-                    return next;
-                  })
-                }
-                />
-              </div>
-            ))}
-          </div>
+                  setSelected(next);
+                }}
+              >
+                <option value="" disabled>
+                  Select a course
+                </option>
+                {courses.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {label(c)}
+                  </option>
+                ))}
+              </select>
+
+              <textarea
+                className="cp-textarea"
+                rows={3}
+                placeholder="Add comments (optional)…"
+                value={comments[i]}
+                onChange={(e) => {
+                  const next = [...comments];
+                  next[i] = e.target.value;
+                  setComments(next);
+                }}
+              />
+            </div>
+          ))}
         </div>
-        <div className="cp-actions">
-          <button type="submit" className="cp-btn">Save Preferences</button>
-        </div>
-      </form>
-    </>
+      </div>
+
+      <div className="cp-actions">
+        <button type="submit" className="cp-btn">
+          Save Preferences
+        </button>
+      </div>
+    </form>
   );
 }
 
-export default CoursePreferencesForm;
+export default CoursePreferencesForm

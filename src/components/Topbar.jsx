@@ -1,21 +1,18 @@
-import htuLogo from "../assets/htu.png"; 
+import "boxicons/css/boxicons.min.css";
 import "./css/Topbar.css";
-
 
 function Topbar({ onLogout, role, user, onToggleSidebar }) {
   return (
     <header className="topbar">
-      <button
-        className="sidebar-toggle"
-        aria-label="Open sidebar"
-        aria-controls="student-sidebar"
-        onClick={onToggleSidebar}
-      >
-        ☰
-      </button>
-
       <div className="topbar__left">
         <h1 className="topbar__role">
+          {/* 🔥 This toggles sidebar open/close */}
+          <i
+            className="bx bx-menu topbar__menu-icon"
+            onClick={onToggleSidebar}
+            role="button"
+            aria-label="Toggle sidebar"
+          ></i>
           {role === "student" ? "Student Portal" : "Supervisor Portal"}
         </h1>
       </div>
@@ -24,15 +21,15 @@ function Topbar({ onLogout, role, user, onToggleSidebar }) {
         <button className="topbar__btn" onClick={onLogout}>Logout</button>
         <div className="topbar__user">
           <img
-            src={user.avatar || htuLogo}
-            alt={user.name || "User"}
+            src={user.avatar}
+            alt={user.name}
             className="topbar__avatar"
           />
-          <span className="topbar__name">{user.name || "User"}</span>
+          <span className="topbar__name">{user.name}</span>
         </div>
       </div>
     </header>
   );
 }
 
-export default Topbar
+export default Topbar;

@@ -27,10 +27,10 @@
 .sd-label{ color:var(--sup-muted); font-size:12px; font-weight:600; }
 .sd-value{ color:var(--sup-text); font-weight:700; }
 .sd-field--name{ grid-column:2; grid-row:1; }
-.sd-field--email{ grid-column:2; grid-row:2; }
+.sd-field--email{ grid-column:4; grid-row:1; }
 .sd-field--id{ grid-column:3; grid-row:1; }
-.sd-field--sem{ grid-column:3; grid-row:2; }
-.sd-field--major{ grid-column:4; grid-row:1; }
+/* .sd-field--sem{ grid-column:3; grid-row:2; }
+.sd-field--major{ grid-column:4; grid-row:1; } */
 
 /* ===== Table (default on normal screens) ===== */
 .sd-table-wrap{ margin-top:8px; }
@@ -38,7 +38,6 @@
   width:100%;
   border-collapse:separate;
   border-spacing:0 10px;      /* soft gaps */
-  min-width:840px;
 }
 .sd-table thead th{
   text-align:left; font-weight:700; color:#374151;

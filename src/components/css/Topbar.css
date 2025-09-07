@@ -72,6 +72,9 @@
 
 @media (max-width: 448px) {
   .sidebar-toggle { font-size: 20px; padding: 6px; }
+  .topbar__role{
+    font-size: 17px;
+  }
 }
 
 .topbar {
@@ -112,3 +115,24 @@
 .cp-delete:hover {
   background: rgba(200,16,46,0.1);
 }
+.topbar__role {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* space between icon and text */
+}
+
+.topbar__menu-icon {
+  font-size: 1.5rem; /* adjust size */
+  cursor: pointer;
+}
+.topbar__menu-icon {
+  font-size: 1.8rem;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: color 0.2s ease;
+}
+
+.topbar__menu-icon:hover {
+  color: #c8102e; /* highlight on hover */
+}
+
