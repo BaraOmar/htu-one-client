@@ -25,3 +25,113 @@
     overflow: hidden;
   }
 }
+/* Sidebar is hidden by default (slides off-screen to the left) */
+#student-sidebar {
+  position: fixed;       /* keeps it anchored */
+  top: 0;
+  left: 0;
+  height: 100vh;
+  /* width: 260px; */    /* set your sidebar width if not already */
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  z-index: 1000;         /* under the backdrop (which is 999) or adjust as needed */
+}
+
+/* When .sidebar-open is on the root, slide it in */
+.student-layout.sidebar-open #student-sidebar {
+  transform: translateX(0);
+}
+
+.student-layout__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.25s ease; /* smooth push */
+}
+
+/* When sidebar open, push main content */
+.student-layout.sidebar-open .student-layout__main {
+  margin-left: 260px; /* same as sidebar width */
+}
+/* Sidebar default (desktop push) */
+#student-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  transform: translateX(0);
+  transition: transform 0.25s ease;
+}
+
+/* Main content pushes */
+.student-layout__main {
+  flex: 1;
+  transition: margin-left 0.25s ease;
+}
+.student-layout.sidebar-open .student-layout__main {
+  margin-left: 260px;
+}
+
+/* === Mobile (≤ 771px): overlay === */
+@media (max-width: 771px) {
+  #student-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    z-index: 1000;
+  }
+
+  .student-layout.sidebar-open #student-sidebar {
+    transform: translateX(0);
+  }
+
+  .student-layout.sidebar-open .student-layout__main {
+    margin-left: 0; /* don’t push on mobile */
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.32);
+    z-index: 999;
+    border: 0;
+  }
+
+  .student-layout.sidebar-open {
+    overflow: hidden; /* prevent scrolling */
+  }
+}
+/* ===== Desktop (≥ 772px): toggle + push ===== */
+@media (min-width: 772px) {
+  /* Make sure the sidebar has a fixed width in the flex row */
+  #student-sidebar,
+  .student-sidebar {
+    width: 260px;
+    flex: 0 0 260px;
+    transition: margin-left 0.25s ease;
+  }
+
+  /* Hidden by default (no space taken) */
+  .student-layout #student-sidebar,
+  .student-layout .student-sidebar {
+    margin-left: -260px; /* collapses it out of view AND out of layout */
+  }
+
+  /* When open: slide into place */
+  .student-layout.sidebar-open #student-sidebar,
+  .student-layout.sidebar-open .student-sidebar {
+    margin-left: 0;
+  }
+
+  /* Push main content only when open */
+  .student-layout__main {
+    transition: margin-left 0.25s ease;
+  }
+  .student-layout.sidebar-open .student-layout__main {
+    margin-left: 260px;
+  }
+
+  /* No backdrop on desktop */
+  .sidebar-backdrop { display: none !important; }
+}

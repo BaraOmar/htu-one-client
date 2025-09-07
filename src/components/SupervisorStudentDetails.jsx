@@ -1,36 +1,68 @@
 import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import htuLogo from "../assets/htu.png"; 
 import "./css/SupervisorStudentDetails.css";
 
+const API_BASE = "http://localhost:5000/api";
+
 function SupervisorStudentDetails() {
-  const { id } = useParams();
-
-  // TODO: fetch by id
-  const student = {
+  const { id } = useParams(); // student id from URL
+  const [student, setStudent] = useState({
     avatar: htuLogo,
-    name: "Alice Wonderland",
-    email: "alice.w@htu.edu",
-    studentId: "S-2022-001",
-    major: "Computer Science",
-    semester: "Fall 2024",
-  };
+    name: "",
+    email: "",
+    studentId: "",
+  });
+  const [prefs, setPrefs] = useState([]);
 
-  const prefs = [
-    { title: "Advanced Algorithms", code: "CS301", status: "Approved",
-      comments: "Excellent choice, fundamental for future studies." },
-    { title: "Linear Algebra", code: "MA205", status: "Pending",
-      comments: "Waiting for prerequisite verification." },
-    { title: "Machine Learning", code: "DS410", status: "Feedback",
-      comments: "Consider CS420 for stronger foundational knowledge. Please review course description." },
-    { title: "Introduction to Psychology", code: "PY101", status: "Approved",
-      comments: "Approved as a general elective." },
-    { title: "Digital Logic Design", code: "EE307", status: "Pending",
-      comments: "Still under review by department." },
-    { title: "Creative Writing", code: "EN101", status: "Feedback",
-      comments: "Alternative elective required. This course is not part of your curriculum." },
-    { title: "General Physics I", code: "PH101", status: "Approved",
-      comments: "Core science requirement met." },
-  ];
+  useEffect(() => {
+    const fetchStudentAndPrefs = async () => {
+      try {
+        const raw = localStorage.getItem("user");
+        const user = JSON.parse(raw);
+        const supervisorId = user.id;
+        const headers = { "x-role": "supervisor" };
+
+        // 1️⃣ Fetch all students
+        const studentsRes = await fetch(
+          `${API_BASE}/supervisors/${supervisorId}/students`,
+          { headers }
+        );
+        const students = await studentsRes.json();
+
+        // 2️⃣ Find the student by id
+        const s = students.find(st => String(st.id) === String(id));
+        if (!s) throw new Error("Student not found");
+
+        setStudent(prev => ({
+          ...prev,
+          name: s.full_name,
+          email: s.email,
+          studentId: s.student_id || id,
+        }));
+
+        // 3️⃣ Fetch student's course preferences
+        const prefsRes = await fetch(
+          `${API_BASE}/supervisors/${supervisorId}/students/${id}/requests`,
+          { headers }
+        );
+        const data = await prefsRes.json();
+
+        setPrefs(
+          data.map(p => ({
+            title: p.course_name,
+            code: p.course_number,
+            status: p.status,
+            comments: p.student_comment || "—",
+          }))
+        );
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchStudentAndPrefs();
+  }, [id]);
 
   return (
     <div className="sd">
@@ -43,27 +75,17 @@ function SupervisorStudentDetails() {
 
           <div className="sd-field sd-field--name">
             <div className="sd-label">Full Name</div>
-            <div className="sd-value">{student.name}</div>
+            <div className="sd-value">{student.name || "—"}</div>
           </div>
 
           <div className="sd-field sd-field--email">
             <div className="sd-label">Email</div>
-            <div className="sd-value">{student.email}</div>
+            <div className="sd-value">{student.email || "—"}</div>
           </div>
 
           <div className="sd-field sd-field--id">
             <div className="sd-label">Student ID</div>
-            <div className="sd-value">{student.studentId}</div>
-          </div>
-
-          <div className="sd-field sd-field--sem">
-            <div className="sd-label">Current Semester</div>
-            <div className="sd-value">{student.semester}</div>
-          </div>
-
-          <div className="sd-field sd-field--major">
-            <div className="sd-label">Major</div>
-            <div className="sd-value">{student.major}</div>
+            <div className="sd-value">{student.studentId || "—"}</div>
           </div>
         </div>
       </section>
@@ -120,10 +142,10 @@ function SupervisorStudentDetails() {
 
         <div className="sd-actions">
           <Link to=".." relative="path" className="sd-btn sd-btn--link">Back to list</Link>
-          <button className="sd-btn sd-btn--primary">Approve</button>
         </div>
       </section>
     </div>
   );
 }
-export default SupervisorStudentDetails
+
+export default SupervisorStudentDetails;

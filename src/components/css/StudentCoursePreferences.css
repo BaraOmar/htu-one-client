@@ -10,7 +10,7 @@
 .cp-page { padding:24px; }
 .cp-title { font-size:28px; font-weight:700; margin:4px 0 20px; color:var(--ss-text); }
 
-.cp-form { display:flex; flex-direction:column; gap:24px; }
+.cp-form { display:flex; flex-direction:column; }
 .cp-section { display:flex; flex-direction:column; gap:24px; }
 .cp-section__title { font-size:18px; font-weight:600; color:var(--ss-text); }
 
@@ -67,8 +67,8 @@
   .cp-card { padding:12px; gap:10px; border-radius:10px; }
   .cp-select,.cp-textarea { padding:9px 10px; }
 
-  .cp-actions { justify-content:space-between; gap:10px; }
-  .cp-btn { padding:10px 14px; border-radius:9px; }
+  .cp-actions { justify-content:center; gap:10px; }
+  .cp-btn { padding:10px 14px; border-radius:9px; width: 100%;}
 }
 
 /* =========================

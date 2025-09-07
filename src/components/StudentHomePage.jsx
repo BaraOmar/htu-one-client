@@ -1,17 +1,46 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./css/StudentHomePage.css";
 
-
 function StudentHomePage() {
-    // TODO: replace with real data (API)
-    const requests = [
-        { id: 1, title: "Advanced Database Systems", date: "2024-03-10", status: "Approved" },
-        { id: 2, title: "Machine Learning Fundamentals", date: "2024-03-05", status: "Pending" },
-        { id: 3, title: "Software Engineering Principles", date: "2024-02-28", status: "Feedback Requested" },
-        { id: 4, title: "Human-Computer Interaction", date: "2024-02-20", status: "Approved" },
-        { id: 5, title: "Network Security", date: "2024-02-15", status: "Pending" },
-    ];
-    // const requests = [];
+    const [requests, setRequests] = useState([]);
+    const [user, setUser] = useState("");
+
+    useEffect(() => {
+        const saved = localStorage.getItem("user");
+        const user = JSON.parse(saved);
+        setUser(user);
+        fetch(`http://localhost:5000/api/requests/${user.id}`)
+            .then((res) => (res.ok ? res.json() : []))
+            .then((data) => setRequests(data))
+            .catch((err) => console.error("requests fetch error", err));
+    }, []);
+
+    async function handleDelete(courseId, status) {
+        const requestId = requests[0].request_id;
+
+
+        try {
+            const res = await fetch(
+                `http://localhost:5000/api/requests/${requestId}/preferences/${courseId}/${user.id}`,
+                { method: "DELETE" }
+            );
+            // server-side rule (backend returns 409 for approved)
+            if (res.status === 409) {
+                const msg = await res.json().catch(() => ({}));
+                alert(msg?.message || "Cannot delete approved course");
+                return;
+            }
+
+            const payload = await res.json();
+            const updated = payload.request
+
+            setRequests(updated);
+        } catch (e) {
+            console.error(e);
+            alert("Network error while deleting course.");
+        }
+    }
 
     const hasRequests = requests.length > 0;
 
@@ -34,21 +63,32 @@ function StudentHomePage() {
                         <>
                             <ul className="student-list">
                                 {requests.map((r) => (
-                                    <li key={r.id} className="student-list__item">
-                                        <div className="student-list__title">{r.title}</div>
-                                        <div className="student-list__meta">{r.date}</div>
+                                    <li key={r.course_id} className="student-list__item">
+                                        <div className="student-list__title">{r.course_name}</div>
+                                        <div className="student-list__meta">
+                                            {new Date(r.submitted_at).toLocaleDateString()}
+                                        </div>
                                         <div className="student-list__status">
                                             <span className="student-pill">{r.status}</span>
+                                            <button
+                                                className="student-btn student-btn--danger student-btn--sm"
+                                                onClick={() => handleDelete(r.course_id, r.status)}
+                                                // disabled={r.status === "approved"}
+                                                style={{ marginLeft: 8 }}
+                                                title={r.status === "approved" ? "Approved courses cannot be deleted" : "Delete this course"}
+                                            >
+                                                Delete
+                                            </button>
                                         </div>
                                     </li>
                                 ))}
                             </ul>
 
-                            <div className="student-card__footer">
+                            {/* <div className="student-card__footer">
                                 <Link to="/student/course-preferences" className="student-btn student-btn--light">
                                     View All Preferences
                                 </Link>
-                            </div>
+                            </div> */}
                         </>
                     )}
                 </section>
@@ -61,9 +101,7 @@ function StudentHomePage() {
                 </aside>
             </div>
         </main>
-
     );
 }
 
-
-export default StudentHomePage
+export default StudentHomePage;

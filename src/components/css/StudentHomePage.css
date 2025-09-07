@@ -84,7 +84,7 @@
 
 .student-list__item {
   display: grid;
-  grid-template-columns: 1fr auto 160px;
+  grid-template-columns: 1fr auto 167px;
   gap: 8px;
   align-items: center;
   padding: 12px 0;
@@ -185,6 +185,15 @@
   }
 }
 
+.student-btn--danger {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #f3cbd2;
+}
+
 @media (max-width: 767px) {
   .student-page-title {
     font-size: 20px;
@@ -205,6 +214,13 @@
   .student-btn {
     width: 100%;
   }
+
+  .student-btn--danger {
+    width: auto;
+
+  }
+
+
 }
 
 @media (max-width: 448px) {
@@ -223,5 +239,10 @@
 
   .student-list__meta {
     font-size: 11px;
+  }
+
+  .student-btn--danger {
+    width: auto;
+
   }
 }
