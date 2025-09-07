@@ -1,5 +1,7 @@
 import "boxicons/css/boxicons.min.css";
 import "./css/Topbar.css";
+import { Button } from "@mui/material";
+
 
 function Topbar({ onLogout, role, user, onToggleSidebar }) {
   return (
@@ -18,7 +20,17 @@ function Topbar({ onLogout, role, user, onToggleSidebar }) {
       </div>
 
       <div className="topbar__actions">
-        <button className="topbar__btn" onClick={onLogout}>Logout</button>
+        {/* <button className="topbar__btn" onClick={onLogout}>Logout</button> */}
+        <Button
+          variant="contained"
+          onClick={onLogout}
+          sx={{
+            backgroundColor: "#c8102e",
+            "&:hover": { backgroundColor: "#a10c22" } // darker on hover
+          }}
+        >
+          Logout
+        </Button>
         <div className="topbar__user">
           <img
             src={user.avatar}
