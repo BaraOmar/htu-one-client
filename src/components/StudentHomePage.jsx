@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./css/StudentHomePage.css";
 
 function StudentHomePage() {
+    const BASE_URL = import.meta.env.VITE_SERVER_URL;
     const [requests, setRequests] = useState([]);
     const [user, setUser] = useState("");
 
@@ -10,7 +11,7 @@ function StudentHomePage() {
         const saved = localStorage.getItem("user");
         const user = JSON.parse(saved);
         setUser(user);
-        fetch(`http://localhost:5000/api/requests/${user.id}`)
+        fetch(`${BASE_URL}/api/requests/${user.id}`)
             .then((res) => (res.ok ? res.json() : []))
             .then((data) => setRequests(data))
             .catch((err) => console.error("requests fetch error", err));
@@ -22,7 +23,7 @@ function StudentHomePage() {
 
         try {
             const res = await fetch(
-                `http://localhost:5000/api/requests/${requestId}/preferences/${courseId}/${user.id}`,
+                `${BASE_URL}/api/requests/${requestId}/preferences/${courseId}/${user.id}`,
                 { method: "DELETE" }
             );
             // server-side rule (backend returns 409 for approved)
