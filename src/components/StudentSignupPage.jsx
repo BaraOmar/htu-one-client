@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./css/SignupPage.css";
 
 function StudentSignupPage({ onLogin }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +17,7 @@ function StudentSignupPage({ onLogin }) {
     }
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/signup/student", {
+      const res = await fetch(`${BASE_URL}/api/auth/signup/student`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, fullName: name, password }),

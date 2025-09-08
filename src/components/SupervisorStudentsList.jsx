@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./css/SupervisorStudentsList.css";
 
-const API_BASE = "http://localhost:5000/api";
 
 function SupervisorStudentsList() {
+  
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ function SupervisorStudentsList() {
     const headers = { "x-role": "supervisor" };
 
     // 1) Get students
-    fetch(`${API_BASE}/supervisors/${supervisorId}/students`, { headers })
+    fetch(`${BASE_URL}/api/supervisors/${supervisorId}/students`, { headers })
       .then((r) => (r.ok ? r.json() : []))
       .then((students) => {
         // 2) Directly use the latest submission (assuming it's available in the student object)

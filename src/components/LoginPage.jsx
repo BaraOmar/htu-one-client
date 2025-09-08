@@ -3,6 +3,8 @@ import { useState } from "react";
 import "./css/LoginPage.css";
 
 function LoginPage({ onLogin }) {
+
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -10,13 +12,13 @@ function LoginPage({ onLogin }) {
   const login = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      const user = data.user ?? data; // 👈 normalize
+      const user = data.user ?? data; 
       if (res.ok) onLogin(user);
       else alert(data.message || "Login failed");
     } catch (e) {

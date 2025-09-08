@@ -5,6 +5,7 @@ import "./css/StudentCoursePreferences.css";
 
 function CoursePreferencesForm() {
 
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
   const slots = [0, 1, 2, 3, 4, 5];
   const [courses, setCourses] = useState([]);
   const [selected, setSelected] = useState(Array(6).fill(""));
@@ -13,7 +14,7 @@ function CoursePreferencesForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/courses`)
+    fetch(`${BASE_URL}/api/courses`)
       .then((r) => (r.ok ? r.json() : []))
       .then((data) => setCourses(data))
       .catch((e) => console.error("courses fetch error", e));

@@ -1,12 +1,49 @@
-# React + Vite
+# HTU-One Frontend (Special Topics in Computer Science 1)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the **frontend** for the **HTU-One system**, built with **React (via Vite)** as part of the *Special Topics in Computer Science 1* course.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📖 System Description
 
-## Expanding the ESLint configuration
+The HTU-One system is designed for **students** and **supervisors** to manage course preferences for the upcoming semester. It provides a simple and effective way for students to submit preferences and supervisors to review and approve them.  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✅ User Requirements
+
+- **Authentication**
+  - Login and signup based on role (student or supervisor).  
+
+- **Students**
+  - View available courses for the next semester.  
+  - Submit new course preferences.  
+  - Check the status of submissions (pending, needs feedback, or approved).  
+  - Delete submissions if they are pending or need feedback (cannot delete once approved).  
+
+- **Supervisors**
+  - View their list of assigned students.  
+  - See pending course preference requests.  
+  - Approve requests or send feedback (update status).  
+  - View student information.  
+
+---
+
+## 🛠️ Technologies Used
+
+- **React** – 19.1.1  
+- **Vite** – Frontend build tool  
+- **Fetch API** – For handling HTTP requests  
+- **Local Storage** – For storing session/user data  
+
+---
+
+## 🚀 Getting Started
+
+After cloning the repository, follow these steps to set up and run the project locally:
+
+### 1. Clone the repository
+```bash
+cd htu-one-frontend
+npm install
+npm run dev

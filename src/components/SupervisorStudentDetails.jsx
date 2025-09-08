@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import htuLogo from "../assets/htu.png"; 
 import "./css/SupervisorStudentDetails.css";
 
-const API_BASE = "http://localhost:5000/api";
 
 function SupervisorStudentDetails() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
   const { id } = useParams(); // student id from URL
   const [student, setStudent] = useState({
     avatar: htuLogo,
@@ -25,7 +25,7 @@ function SupervisorStudentDetails() {
 
         // 1️⃣ Fetch all students
         const studentsRes = await fetch(
-          `${API_BASE}/supervisors/${supervisorId}/students`,
+          `${BASE_URL}/api/supervisors/${supervisorId}/students`,
           { headers }
         );
         const students = await studentsRes.json();
@@ -43,7 +43,7 @@ function SupervisorStudentDetails() {
 
         // 3️⃣ Fetch student's course preferences
         const prefsRes = await fetch(
-          `${API_BASE}/supervisors/${supervisorId}/students/${id}/requests`,
+          `${BASE_URL}/api/supervisors/${supervisorId}/students/${id}/requests`,
           { headers }
         );
         const data = await prefsRes.json();

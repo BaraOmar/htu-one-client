@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./css/SupervisorRequests.css";
 
-const API_BASE = "http://localhost:5000/api";
 
 function SupervisorRequests() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
   const [requests, setRequests] = useState([]);
 
   // Fetch all pending requests
@@ -13,7 +13,7 @@ function SupervisorRequests() {
       const user = JSON.parse(raw);
       const supervisorId = user.id;
 
-      const res = await fetch(`${API_BASE}/supervisors/${supervisorId}/requests`, {
+      const res = await fetch(`${BASE_URL}/api/supervisors/${supervisorId}/requests`, {
         headers: { "x-role": "supervisor" },
       });
       const data = await res.json();
@@ -51,7 +51,7 @@ function SupervisorRequests() {
       const request = requests.find(r => r.request_id === requestId && r.course_id === courseId);
 
       await fetch(
-        `${API_BASE}/supervisors/${supervisorId}/requests/${requestId}/courses/${courseId}/status`,
+        `${BASE_URL}/api/supervisors/${supervisorId}/requests/${requestId}/courses/${courseId}/status`,
         {
           method: "PATCH",
           headers: {

@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import "./css/SupervisorDashboard.css";
 import "boxicons/css/boxicons.min.css";
 
-const API_BASE = "http://localhost:5000/api";
 
 function SupervisorDashboard() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
   const [totalStudents, setTotalStudents] = useState(0);
   const [pendingApprovals, setPendingApprovals] = useState(0);
 
@@ -20,12 +20,12 @@ function SupervisorDashboard() {
 
       try {
         // Fetch students
-        const studentsRes = await fetch(`${API_BASE}/supervisors/${supervisorId}/students`, { headers });
+        const studentsRes = await fetch(`${BASE_URL}/api/supervisors/${supervisorId}/students`, { headers });
         const students = studentsRes.ok ? await studentsRes.json() : [];
         setTotalStudents(students.length);
 
         // Fetch pending approvals after students data is fetched
-        const requestsRes = await fetch(`${API_BASE}/supervisors/${supervisorId}/requests`, { headers });
+        const requestsRes = await fetch(`${BASE_URL}/api/supervisors/${supervisorId}/requests`, { headers });
         const pendingRows = requestsRes.ok ? await requestsRes.json() : [];
         setPendingApprovals(pendingRows.length);
       } catch (error) {
